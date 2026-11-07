@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+<!-- =========================================================================
+  robot_arm.urdf.xacro
+  5-DOF Robotic Arm Manipulator with 1-DOF Parallel Gripper
+  
+  Kinematic Chain:
+    world → base_link → waist_link → shoulder_link → elbow_link →
+    wrist_pitch_link → wrist_roll_link → gripper_base_link →
+    gripper_finger_left / gripper_finger_right
+  
+  Joint Summary (6 actuated + 1 mimic):
+    joint1_waist          : revolute  (Z-axis) -π   to  π
+    joint2_shoulder       : revolute  (Y-axis) -π/2 to  π/2
+    joint3_elbow          : revolute  (Y-axis) -π/2 to  π/2
+    joint4_wrist_pitch    : revolute  (Y-axis) -π/2 to  π/2
+    joint5_wrist_roll     : revolute  (X-axis) -π   to  π
+    joint6_gripper_left   : prismatic (Y-axis)  0   to  0.015 m
+    joint7_gripper_right  : prismatic (Y-axis)  0   to  0.015 m (mimic)
+========================================================================== -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_arm_5dof">
+
+  <!-- ===================================================================
+       XACRO PROPERTIES — Tune dimensions here (all values in meters/kg)
+  ==================================================================== -->
+  <!-- Switch to toggle CAD STL mesh visuals or simple primitives -->
+  <xacro:property name="use_mesh"          value="true"/>
+
+  <!-- Base platform (measured from CAD STL: r=60.6mm, h=56mm) -->
+  <xacro:property name="base_radius"       value="0.0606"/>
+  <xacro:property name="base_height"       value="0.056"/>
+  <xacro:property name="base_mass"         value="0.8"/>
+
+  <!-- Waist rotation servo housing (measured from CAD STL: 97x68x97mm, h=60mm to pivot) -->
+  <xacro:property name="waist_x"           value="0.097"/>
+  <xacro:property name="waist_y"           value="0.097"/>
+  <xacro:property name="waist_z"           value="0.060"/>
+  <xacro:property name="waist_mass"        value="0.15"/>
+
+  <!-- Link 1 — Shoulder to Elbow (pivot-to-pivot distance: 120mm) -->
+  <xacro:property name="link1_radius"      value="0.021"/>
+  <xacro:property name="link1_length"      value="0.12"/>
+  <xacro:property name="link1_mass"        value="0.20"/>
+
+  <!-- Link 2 — Elbow to Wrist (pivot-to-pivot distance: 100mm) -->
+  <xacro:property name="link2_radius"      value="0.019"/>
+  <xacro:property name="link2_length"      value="0.10"/>
+  <xacro:property name="link2_mass"        value="0.15"/>
+
+  <!-- Link 3 — Wrist pitch (measured from CAD STL: length 46mm) -->
+  <xacro:property name="link3_radius"      value="0.0165"/>
+  <xacro:property name="link3_length"      value="0.046"/>
+  <xacro:property name="link3_mass"        value="0.10"/>
+
+  <!-- Wrist roll (measured from CAD STL Blue Servo: 30mm) -->
+  <xacro:property name="wrist_roll_radius" value="0.012"/>
+  <xacro:property name="wrist_roll_length" value="0.030"/>
+  <xacro:property name="wrist_roll_mass"   value="0.05"/>
+
+  <!-- Gripper base (measured from CAD STL: 53x77x28mm) -->
+  <xacro:property name="gripper_base_x"    value="0.053"/>
+  <xacro:property name="gripper_base_y"    value="0.077"/>
+  <xacro:property name="gripper_base_z"    value="0.028"/>
+  <xacro:property name="gripper_base_mass" value="0.04"/>
+
+  <!-- Gripper fingers (measured from CAD STL: 65x19x8.5mm) -->
+  <xacro:property name="finger_x"          value="0.019"/>
+  <xacro:property name="finger_y"          value="0.0085"/>
+  <xacro:property name="finger_z"          value="0.045"/>
+  <xacro:property name="finger_mass"       value="0.01"/>
+
+  <!-- Joint velocity / effort limits -->
+  <xacro:property name="revolute_vel"      value="1.5708"/>
+  <xacro:property name="revolute_eff"      value="10.0"/>
+  <xacro:property name="wrist_vel"         value="3.14159"/>
+  <xacro:property name="wrist_eff"         value="5.0"/>
+  <xacro:property name="gripper_vel"       value="0.05"/>
+  <xacro:property name="gripper_eff"       value="5.0"/>
+
+  <!-- Mathematical constants (pi is built-in to xacro) -->
+
+  <!-- ===================================================================
+       XACRO MACROS — Inertia helpers
+  ==================================================================== -->
+
+  <!-- Inertia of a solid cylinder (aligned along Z-axis) -->
+  <xacro:macro name="cylinder_inertia" params="mass radius length">
+    <inertial>
+      <mass value="${mass}"/>
+      <inertia ixx="${(1.0/12.0)*mass*(3.0*radius*radius + length*length)}"
+               ixy="0.0" ixz="0.0"
+               iyy="${(1.0/12.0)*mass*(3.0*radius*radius + length*length)}"
+               iyz="0.0"
+               izz="${0.5*mass*radius*radius}"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- Inertia of a solid box -->
+  <xacro:macro name="box_inertia" params="mass x y z">
+    <inertial>
+      <mass value="${mass}"/>
+      <inertia ixx="${(1.0/12.0)*mass*(y*y + z*z)}"
+               ixy="0.0" ixz="0.0"
+               iyy="${(1.0/12.0)*mass*(x*x + z*z)}"
+               iyz="0.0"
+               izz="${(1.0/12.0)*mass*(x*x + y*y)}"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- ===================================================================
+       MATERIAL COLORS (for RViz display)
+  ==================================================================== -->
+  <material name="DarkGrey">
+    <color rgba="0.3 0.3 0.3 1.0"/>
+  </material>
+  <material name="Silver">
+    <color rgba="0.75 0.75 0.75 1.0"/>
+  </material>
+  <material name="Red">
+    <color rgba="0.85 0.1 0.1 1.0"/>
+  </material>
+  <material name="Blue">
+    <color rgba="0.1 0.1 0.85 1.0"/>
+  </material>
+  <material name="Orange">
+    <color rgba="1.0 0.55 0.0 1.0"/>
+  </material>
+  <material name="Black">
+    <color rgba="0.1 0.1 0.1 1.0"/>
+  </material>
+  <material name="White">
+    <color rgba="0.95 0.95 0.95 1.0"/>
+  </material>
+
+  <!-- ===================================================================
+       INCLUDE GAZEBO-SPECIFIC SETTINGS
+  ==================================================================== -->
+  <xacro:include filename="$(find robot_arm_description)/urdf/robot_arm_gazebo.xacro"/>
+
+  <!-- ===================================================================
+       WORLD LINK  (fixed reference for Gazebo)
+  ==================================================================== -->
+  <link name="world"/>
+
+  <joint name="fixed_world" type="fixed">
+    <parent link="world"/>
+    <child  link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ===================================================================
+       BASE LINK — Stationary platform
+  ==================================================================== -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/base_link.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="DarkGrey"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${base_height/2.0}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${base_radius}" length="${base_height}"/>
+      </geometry>
+    </collision>
+    <xacro:cylinder_inertia mass="${base_mass}" radius="${base_radius}" length="${base_height}"/>
+  </link>
+
+  <!-- ===================================================================
+       JOINT 1 — Waist rotation (revolute, Z-axis)
+  ==================================================================== -->
+  <joint name="joint1_waist" type="revolute">
+    <parent link="base_link"/>
+    <child  link="waist_link"/>
+    <origin xyz="0 0 0.0560" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="${-pi}" upper="${pi}"
+           velocity="${revolute_vel}" effort="${revolute_eff}"/>
+    <dynamics damping="0.1" friction="0.05"/>
+  </joint>
+
+  <!-- WAIST LINK — Servo housing that rotates on the base -->
+  <link name="waist_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/waist_link.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.030" rpy="0 0 0"/>
+      <geometry>
+        <box size="${waist_x} ${waist_y} ${waist_z}"/>
+      </geometry>
+    </collision>
+    <xacro:box_inertia mass="${waist_mass}" x="${waist_x}" y="${waist_y}" z="${waist_z}"/>
+  </link>
+
+  <!-- ===================================================================
+       JOINT 2 — Shoulder pitch (revolute)
+  ==================================================================== -->
+  <joint name="joint2_shoulder" type="revolute">
+    <parent link="waist_link"/>
+    <child  link="shoulder_link"/>
+    <origin xyz="-0.0040 -0.0104 0.0499" rpy="0 0 0"/>
+    <axis xyz="-0.5948 0.6550 -0.4660"/>
+    <limit lower="${-pi/2.0}" upper="${pi/2.0}"
+           velocity="${revolute_vel}" effort="15.0"/>
+    <dynamics damping="0.1" friction="0.05"/>
+  </joint>
+
+  <!-- SHOULDER LINK (Link 1) — Shoulder to Elbow -->
+  <link name="shoulder_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/shoulder_link.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="Red"/>
+    </visual>
+    <collision>
+      <origin xyz="0.005 0.004 0.057" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${link1_radius}" length="${link1_length}"/>
+      </geometry>
+    </collision>
+    <xacro:cylinder_inertia mass="${link1_mass}" radius="${link1_radius}" length="${link1_length}"/>
+  </link>
+
+  <!-- ===================================================================
+       JOINT 3 — Elbow pitch (revolute)
+  ==================================================================== -->
+  <joint name="joint3_elbow" type="revolute">
+    <parent link="shoulder_link"/>
+    <child  link="elbow_link"/>
+    <origin xyz="0.0104 0.0089 0.1145" rpy="0 0 0"/>
+    <axis xyz="-0.2549 0.9635 0.0824"/>
+    <limit lower="${-pi/2.0}" upper="${pi/2.0}"
+           velocity="${revolute_vel}" effort="${revolute_eff}"/>
+    <dynamics damping="0.08" friction="0.04"/>
+  </joint>
+
+  <!-- ELBOW LINK (Link 2) — Elbow to Wrist -->
+  <link name="elbow_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/elbow_link.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.035 -0.032 -0.010" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${link2_radius}" length="${link2_length}"/>
+      </geometry>
+    </collision>
+    <xacro:cylinder_inertia mass="${link2_mass}" radius="${link2_radius}" length="${link2_length}"/>
+  </link>
+
+  <!-- ===================================================================
+       JOINT 4 — Wrist pitch (revolute)
+  ==================================================================== -->
+  <joint name="joint4_wrist_pitch" type="revolute">
+    <parent link="elbow_link"/>
+    <child  link="wrist_pitch_link"/>
+    <origin xyz="-0.07397 -0.07358 -0.00532" rpy="0 0 0"/>
+    <axis xyz="-0.6698 0.7424 -0.0088"/>
+    <limit lower="${-pi/2.0}" upper="${pi/2.0}"
+           velocity="${wrist_vel}" effort="${wrist_eff}"/>
+    <dynamics damping="0.05" friction="0.03"/>
+  </joint>
+
+  <!-- WRIST PITCH LINK (Link 3) -->
+  <link name="wrist_pitch_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/wrist_pitch_link.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="Silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.0186 -0.0145 -0.0015" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${link3_radius}" length="${link3_length}"/>
+      </geometry>
+    </collision>
+    <xacro:cylinder_inertia mass="${link3_mass}" radius="${link3_radius}" length="${link3_length}"/>
+  </link>
+
+  <!-- ===================================================================
+       JOINT 5 — Wrist roll (revolute)
+  ==================================================================== -->
+  <joint name="joint5_wrist_roll" type="revolute">
+    <parent link="wrist_pitch_link"/>
+    <child  link="wrist_roll_link"/>
+    <origin xyz="-0.04414 -0.04642 0.00664" rpy="0 0 0"/>
+    <axis xyz="-0.0313 -0.0164 0.9994"/>
+    <limit lower="${-pi}" upper="${pi}"
+           velocity="${wrist_vel}" effort="${wrist_eff}"/>
+    <dynamics damping="0.03" friction="0.02"/>
+  </joint>
+
+  <!-- WRIST ROLL LINK (Virtual connection to Gripper) -->
+  <link name="wrist_roll_link">
+    <inertial>
+      <mass value="${wrist_roll_mass}"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- ===================================================================
+       FIXED JOINT — Wrist roll to Gripper base
+  ==================================================================== -->
+  <joint name="gripper_base_joint" type="fixed">
+    <parent link="wrist_roll_link"/>
+    <child  link="gripper_base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- GRIPPER BASE LINK (Complete Mechanical Gripper Assembly) -->
+  <link name="gripper_base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robot_arm_description/meshes/gripper_assembly.stl" scale="1 1 1"/>
+      </geometry>
+      <material name="DarkGrey"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.0234 0.0033 -0.0061" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.106 0.104 0.043"/>
+      </geometry>
+    </collision>
+    <xacro:box_inertia mass="${gripper_base_mass}" x="${gripper_base_x}" y="${gripper_base_y}" z="${gripper_base_z}"/>
+  </link>
+
+  <!-- ===================================================================
+       JOINT 6 & 7 — Gripper finger joints (for teleop compatibility)
+  ==================================================================== -->
+  <joint name="joint6_gripper_left" type="prismatic">
+    <parent link="gripper_base_link"/>
+    <child  link="gripper_finger_left"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0.0" upper="0.015"
+           velocity="${gripper_vel}" effort="${gripper_eff}"/>
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+
+  <link name="gripper_finger_left">
+    <inertial>
+      <mass value="${finger_mass}"/>
+      <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <joint name="joint7_gripper_right" type="prismatic">
+    <parent link="gripper_base_link"/>
+    <child  link="gripper_finger_right"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.0" upper="0.015"
+           velocity="${gripper_vel}" effort="${gripper_eff}"/>
+    <mimic joint="joint6_gripper_left" multiplier="1.0" offset="0.0"/>
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+
+  <link name="gripper_finger_right">
+    <inertial>
+      <mass value="${finger_mass}"/>
+      <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+</robot>

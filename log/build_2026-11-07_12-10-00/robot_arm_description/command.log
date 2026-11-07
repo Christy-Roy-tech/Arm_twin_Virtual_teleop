@@ -1,0 +1,4 @@
+Invoking command in '/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/christy/5_Dof_robotic _arm simulation/build/robot_arm_description -- -j12 -l12
+Invoked command in '/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/christy/5_Dof_robotic _arm simulation/build/robot_arm_description -- -j12 -l12
+Invoking command in '/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/christy/5_Dof_robotic _arm simulation/build/robot_arm_description
+Invoked command in '/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/christy/5_Dof_robotic _arm simulation/build/robot_arm_description

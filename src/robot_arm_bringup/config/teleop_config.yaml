@@ -1,0 +1,22 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# teleop_config.yaml — Configuration for the joint_state_publisher_gui
+# teleoperation node for the 5-DOF robotic arm.
+# ──────────────────────────────────────────────────────────────────────────────
+
+# Publishing rate for joint states (Hz)
+rate: 50
+
+# If true, the joint_state_publisher publishes default (zero) values for
+# joints it has not yet received messages for. Useful during bringup.
+publish_default_positions: true
+
+# Default position values for each joint (radians/metres)
+# These names MUST match the URDF joint names exactly.
+zeros:
+  joint1_waist: 0.0
+  joint2_shoulder: 0.0
+  joint3_elbow: 0.0
+  joint4_wrist_pitch: 0.0
+  joint5_wrist_roll: 0.0
+  joint6_gripper_left: 0.0
+  joint7_gripper_right: 0.0

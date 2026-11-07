@@ -1,0 +1,63 @@
+# ==============================================================================
+# Joint Limits Configuration for 5-DOF Robotic Arm
+# ==============================================================================
+# All angles in radians, distances in meters, velocities in rad/s or m/s.
+# ==============================================================================
+
+joint_limits:
+
+  # Joint 1: Waist / Base rotation (revolute, Z-axis)
+  joint1_waist:
+    has_position_limits: true
+    min_position: -3.14159   # -π rad (-180°)
+    max_position:  3.14159   #  π rad ( 180°)
+    max_velocity:  1.5708    # π/2 rad/s
+    max_effort:    10.0      # N·m
+
+  # Joint 2: Shoulder pitch (revolute, Y-axis)
+  joint2_shoulder:
+    has_position_limits: true
+    min_position: -1.5708    # -π/2 rad (-90°)
+    max_position:  1.5708    #  π/2 rad ( 90°)
+    max_velocity:  1.5708
+    max_effort:    15.0
+
+  # Joint 3: Elbow pitch (revolute, Y-axis)
+  joint3_elbow:
+    has_position_limits: true
+    min_position: -1.5708    # -π/2 rad (-90°)
+    max_position:  1.5708    #  π/2 rad ( 90°)
+    max_velocity:  1.5708
+    max_effort:    10.0
+
+  # Joint 4: Wrist pitch (revolute, Y-axis)
+  joint4_wrist_pitch:
+    has_position_limits: true
+    min_position: -1.5708    # -π/2 rad (-90°)
+    max_position:  1.5708    #  π/2 rad ( 90°)
+    max_velocity:  3.14159
+    max_effort:    5.0
+
+  # Joint 5: Wrist roll (revolute, X-axis)
+  joint5_wrist_roll:
+    has_position_limits: true
+    min_position: -3.14159   # -π rad (-180°)
+    max_position:  3.14159   #  π rad ( 180°)
+    max_velocity:  3.14159
+    max_effort:    5.0
+
+  # Joint 6: Gripper left finger (prismatic)
+  joint6_gripper_left:
+    has_position_limits: true
+    min_position: 0.0        # Fully closed (m)
+    max_position: 0.015      # Fully open  (m)
+    max_velocity: 0.05       # m/s
+    max_effort:   5.0        # N
+
+  # Joint 7: Gripper right finger (prismatic, mimics joint 6)
+  joint7_gripper_right:
+    has_position_limits: true
+    min_position: 0.0
+    max_position: 0.015
+    max_velocity: 0.05
+    max_effort:   5.0

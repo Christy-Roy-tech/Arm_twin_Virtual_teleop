@@ -1,0 +1,25 @@
+[0.366s] Invoking command in '/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_teleop': PYTHONPATH=/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/christy/5_Dof_robotic _arm simulation/build/robot_arm_teleop/build --no-deps symlink_data
+[0.518s] running develop
+[0.619s] running egg_info
+[0.619s] creating robot_arm_teleop.egg-info
+[0.620s] writing robot_arm_teleop.egg-info/PKG-INFO
+[0.620s] writing dependency_links to robot_arm_teleop.egg-info/dependency_links.txt
+[0.620s] writing entry points to robot_arm_teleop.egg-info/entry_points.txt
+[0.620s] writing requirements to robot_arm_teleop.egg-info/requires.txt
+[0.620s] writing top-level names to robot_arm_teleop.egg-info/top_level.txt
+[0.620s] writing manifest file 'robot_arm_teleop.egg-info/SOURCES.txt'
+[0.621s] reading manifest file 'robot_arm_teleop.egg-info/SOURCES.txt'
+[0.621s] writing manifest file 'robot_arm_teleop.egg-info/SOURCES.txt'
+[0.622s] running build_ext
+[0.622s] Creating /home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/lib/python3.10/site-packages/robot-arm-teleop.egg-link (link to .)
+[0.623s] Installing joint_command_publisher script to /home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/lib/robot_arm_teleop
+[0.623s] Installing keyboard_teleop script to /home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/lib/robot_arm_teleop
+[0.623s] 
+[0.623s] Installed /home/christy/5_Dof_robotic _arm simulation/build/robot_arm_teleop
+[0.623s] running symlink_data
+[0.623s] creating /home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/share/ament_index
+[0.623s] creating /home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/share/ament_index/resource_index
+[0.623s] creating /home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/share/ament_index/resource_index/packages
+[0.623s] symbolically linking /home/christy/5_Dof_robotic _arm simulation/build/robot_arm_teleop/resource/robot_arm_teleop -> /home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/share/ament_index/resource_index/packages
+[0.623s] symbolically linking /home/christy/5_Dof_robotic _arm simulation/build/robot_arm_teleop/package.xml -> /home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/share/robot_arm_teleop
+[0.649s] Invoked command in '/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_teleop' returned '0': PYTHONPATH=/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_teleop/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_teleop/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/christy/5_Dof_robotic _arm simulation/build/robot_arm_teleop/build --no-deps symlink_data

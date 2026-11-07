@@ -1,0 +1,57 @@
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//urdf/robot_arm.urdf.xacro
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//urdf/robot_arm_gazebo.xacro
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/README.md
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/base.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/base_link.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/elbow_link.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/finger_left.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/finger_right.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/gripper_assembly.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/gripper_base.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/gripper_base_link.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/gripper_finger_left.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/gripper_finger_right.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/link1_shoulder.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/link2_elbow.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/link3_wrist.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/link3_wrist_pitch.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/link4_wrist_roll.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/shoulder_link.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/5 DOF Robotic Arm with 1 DOF Mechanical Gripper.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Base of Robotic Arm.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Blue Servo.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Gear 1.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Gear 2.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Gripper Link.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Gripper assembly.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Gripper.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Link_1.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Link_2.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Link_3.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/NUT m3.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Nut.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Robot Gripper Design.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Servo Motor.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/stl files/Waist 1.STL
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/waist.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/waist_link.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/wrist_pitch_link.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/wrist_roll.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//meshes/wrist_roll_link.stl
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//rviz/config.rviz
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description//config/joint_limits.yaml
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/ament_index/resource_index/package_run_dependencies/robot_arm_description
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/ament_index/resource_index/parent_prefix_path/robot_arm_description
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/environment/ament_prefix_path.sh
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/environment/ament_prefix_path.dsv
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/environment/path.sh
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/environment/path.dsv
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/local_setup.bash
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/local_setup.sh
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/local_setup.zsh
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/local_setup.dsv
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/package.dsv
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/ament_index/resource_index/packages/robot_arm_description
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/cmake/robot_arm_descriptionConfig.cmake
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/cmake/robot_arm_descriptionConfig-version.cmake
+/home/christy/5_Dof_robotic _arm simulation/install/robot_arm_description/share/robot_arm_description/package.xml
