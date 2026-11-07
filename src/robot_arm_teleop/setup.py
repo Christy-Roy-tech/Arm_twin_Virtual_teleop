@@ -15,10 +15,10 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='christy',
-    maintainer_email='christy@todo.todo',
+    maintainer='Christy Roy',
+    maintainer_email='christyroy123roy687@gmail.com',
     description='Keyboard and GUI teleoperation for a 5-DOF robotic arm',
-    license='Apache-2.0',
+    license='MIT',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [

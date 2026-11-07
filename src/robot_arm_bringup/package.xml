@@ -4,7 +4,7 @@
   <name>robot_arm_bringup</name>
   <version>0.1.0</version>
   <description>Bringup and launch files for the 5-DOF robotic arm manipulator</description>
-  <maintainer email="christy@todo.todo">christy</maintainer>
+  <maintainer email="christyroy123roy687@gmail.com">Christy Roy</maintainer>
   <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>

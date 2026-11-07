@@ -1,0 +1,46 @@
+# ROS 2 build & install artifacts
+build/
+install/
+log/
+COLCON_IGNORE
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# C / C++ compiled objects & libraries
+*.o
+*.obj
+*.so
+*.dylib
+*.a
+*.lib
+*.bin
+a.out
+
+# CMake artifacts
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+
+# Editor / IDE metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment & Secrets
+.env
+.env.*
+*.pem
+*.key

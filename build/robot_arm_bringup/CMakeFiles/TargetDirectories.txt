@@ -1,9 +1,0 @@
-/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_bringup/CMakeFiles/uninstall.dir
-/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_bringup/CMakeFiles/robot_arm_bringup_uninstall.dir
-/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_bringup/CMakeFiles/test.dir
-/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_bringup/CMakeFiles/edit_cache.dir
-/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_bringup/CMakeFiles/rebuild_cache.dir
-/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_bringup/CMakeFiles/list_install_components.dir
-/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_bringup/CMakeFiles/install.dir
-/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_bringup/CMakeFiles/install/local.dir
-/home/christy/5_Dof_robotic _arm simulation/build/robot_arm_bringup/CMakeFiles/install/strip.dir

@@ -95,16 +95,16 @@ When exporting from SolidWorks:
 ### 3.2 Handling File Names and Directory Spaces
 
 > **CRITICAL ROS 2 BUG TO AVOID:**
-> ROS 2's underlying resource retriever (`resource_retriever` / `urdfdom`) has a known issue parsing paths that contain spaces (e.g. `/home/christy/5_Dof_robotic _arm simulation`). It treats the space as an invalid URL character and RViz fails to load meshes with:
-> `[rviz2]: Error retrieving file [file:///home/christy/5_Dof_robotic _arm simulation/...]`
+> ROS 2's underlying resource retriever (`resource_retriever` / `urdfdom`) has a known issue parsing paths that contain spaces (e.g. `/home/user/5_Dof_robotic _arm simulation`). It treats the space as an invalid URL character and RViz fails to load meshes with:
+> `[rviz2]: Error retrieving file [file:///home/user/5_Dof_robotic _arm simulation/...]`
 
-**The Fix:** Create a clean symlink to your workspace without spaces:
+**The Fix:** Ensure your workspace directory path has no spaces, or create a clean symlink to your workspace without spaces:
 ```bash
-ln -s "/home/christy/5_Dof_robotic _arm simulation" /home/christy/robot_arm_ws
+ln -s "/path/to/your workspace with spaces" ~/robot_arm_ws
 ```
-Always run `colcon build` and source your workspace through this clean symlink:
+Always run `colcon build` and source your workspace through this clean path:
 ```bash
-cd /home/christy/robot_arm_ws
+cd ~/robot_arm_ws
 ```
 
 ---
@@ -171,8 +171,8 @@ sudo apt install -y \
 # 1. Source ROS 2 system setup
 source /opt/ros/humble/setup.bash
 
-# 2. Go to workspace via clean symlink (no spaces in path)
-cd /home/christy/robot_arm_ws
+# 2. Go to workspace root (ensure no spaces in path)
+cd ~/robot_arm_ws  # or your workspace directory
 
 # 3. Build all 3 packages with symlink install (fast rebuilds)
 colcon build --symlink-install
@@ -195,7 +195,7 @@ To inspect the 3D robot model with the integrated CAD meshes and interactive joi
 
 ```bash
 source /opt/ros/humble/setup.bash
-source /home/christy/robot_arm_ws/install/setup.bash
+source install/setup.bash
 
 ros2 launch robot_arm_bringup display.launch.py
 ```
@@ -220,7 +220,7 @@ To simulate the arm with realistic physics, inertia, and gravity:
 
 ```bash
 source /opt/ros/humble/setup.bash
-source /home/christy/robot_arm_ws/install/setup.bash
+source install/setup.bash
 
 ros2 launch robot_arm_bringup gazebo.launch.py
 ```
@@ -235,7 +235,7 @@ To run the complete digital twin (simulating in Gazebo while viewing in RViz wit
 
 ```bash
 source /opt/ros/humble/setup.bash
-source /home/christy/robot_arm_ws/install/setup.bash
+source install/setup.bash
 
 ros2 launch robot_arm_bringup teleop.launch.py
 ```

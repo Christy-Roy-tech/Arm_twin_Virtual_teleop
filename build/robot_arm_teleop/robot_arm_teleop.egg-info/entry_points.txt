@@ -1,4 +1,0 @@
-[console_scripts]
-joint_command_publisher = robot_arm_teleop.joint_command_publisher:main
-keyboard_teleop = robot_arm_teleop.keyboard_teleop:main
-

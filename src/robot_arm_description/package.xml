@@ -4,8 +4,8 @@
   <name>robot_arm_description</name>
   <version>0.1.0</version>
   <description>URDF/Xacro description for a 5-DOF robotic arm manipulator with a 1-DOF parallel gripper.</description>
-  <maintainer email="christy@todo.todo">christy</maintainer>
-  <license>Apache-2.0</license>
+  <maintainer email="christyroy123roy687@gmail.com">Christy Roy</maintainer>
+  <license>MIT</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
